@@ -1,0 +1,93 @@
+{
+  "id": "celebahq128_experiment_INR",
+  "dataset": "celebahq",
+  "path_to_data": ".\\data\\celeba_hq\\train\\128INR512_mixed\\",
+  "resolution": 128,
+  "secret_resolution": 512,
+  "sr": 0.05,
+  "startup": {
+    "model_file": "2024-06-06_11-23-51_celebahq128_experiment_INR/inr_model.pt",
+    "generate_key_method": "prune",
+    "key_random_seeds": [1, 2]
+  },
+  "training": {
+    "epochs": 18000,
+    "batch_size": 1,
+    "max_num_points": null,
+    "lr": 1e-3,
+    "lr_disc": 4e-4,
+    "r1_weight": 10.0,
+    "print_freq": 50,
+    "model_save_freq": 50
+  },
+  "sampling":{
+      "sparse_masks": "2024-06-06_13-11-04_celebahq128_experiment_INR_prune/sparse_masks.pkl",
+      "key_random_seed": 1
+  },
+  "generator": {
+    "layer_sizes": [256, 256, 256, 256, 256, 256],
+    "latent_dim": 64,
+    "hypernet_layer_sizes": [256, 512],
+    "encoding": {
+      "num_frequencies": 128,
+      "std_dev": 2.0
+    }
+  },
+  "discriminator": {
+    "norm_order": 2.0,
+    "add_batchnorm": true,
+    "add_weightnet_batchnorm": true,
+    "deterministic": true,
+    "same_coordinates": true,
+    "linear_layer_sizes": [],
+    "layer_configs":
+    [
+      {
+        "out_channels": 64, 
+        "num_output_points": 4096, 
+        "num_neighbors": 9, 
+        "mid_channels": [16, 16, 16, 16]
+      }, 
+      {
+        "num_output_points": 1024, 
+        "num_neighbors": 9
+      }, 
+      {
+        "out_channels": 128, 
+        "num_output_points": 1024, 
+        "num_neighbors": 9, 
+        "mid_channels": [16, 16, 16, 16]
+      }, 
+      {
+        "num_output_points": 256, 
+        "num_neighbors": 9
+      }, 
+      {
+        "out_channels": 256, 
+        "num_output_points": 256, 
+        "num_neighbors": 9, 
+        "mid_channels": [16, 16, 16, 16]
+      }, 
+      {
+        "num_output_points": 64, 
+        "num_neighbors": 9
+      }, 
+      {
+        "out_channels": 512, 
+        "num_output_points": 64, 
+        "num_neighbors": 9, 
+        "mid_channels": [16, 16, 16, 16]
+      }, 
+      {
+        "num_output_points": 16, 
+        "num_neighbors": 9
+      }, 
+      {
+        "out_channels": 1, 
+        "num_output_points": 1, 
+        "num_neighbors": 16, 
+        "mid_channels": [16, 16, 16, 16]
+      }
+    ]
+  }
+}
